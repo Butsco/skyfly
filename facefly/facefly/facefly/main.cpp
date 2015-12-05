@@ -40,7 +40,8 @@ int main(int argc, char** argv)
     
     //cout << "outPath: " << outPath << "\n";
     
-    Mat src = imread(framePath, 1 );
+    Mat src = imread(framePath, 1);
+    Mat output;
     Mat grey;
     cvtColor(src, grey, COLOR_BGR2GRAY);
     
@@ -51,15 +52,24 @@ int main(int argc, char** argv)
     
     printf("%zd face(s) are found.\n", faces.size());
     
+    output = src.clone();
+    
     for (int i = 0; i < faces.size(); i++) {
         Rect r = faces[i];
         printf("a face is found at Rect(%d,%d,%d,%d).\n", r.x, r.y, r.width, r.height);
+        
+        rectangle(output,
+                  Point(r.x, r.y),
+                  Point(r.x+r.width, r.y+r.height),
+                  CV_RGB(255,0,0),
+                  2
+        );
     }
     
-    imwrite(outPath, grey);
+    imwrite(outPath, output);
     
     namedWindow(frameFilename, WINDOW_AUTOSIZE );
-    imshow("Unprocessed Image",grey);
+    imshow("Unprocessed Image",output);
     waitKey(0);
     
     return 0;
