@@ -30,13 +30,14 @@ Mat src;
 Mat grey;
 Mat output;
 Mat face;
+Size faceSize(200,200);
 
 int main(int argc, char** argv)
 {
     cout << "Init\n";
     faceCascade = CascadeClassifier(cascadeFile);
     
-    for (int i=1; i<=1688; i++) {
+    for (int i=1689; i<=6750; i++) {
         processFrame(i, false);
     }
     
@@ -47,7 +48,7 @@ void processFrame(int frameId, bool display) {
     char framePath[150];
     char outPath[150];
     char facePath[150];
-    sprintf(framePath, "%s%d.png", frameDir, frameId);
+    sprintf(framePath, "%s%d.jpg", frameDir, frameId);
     sprintf(outPath, "%s%d.png", outDir, frameId);
     
     //cout << "frame: " << framePath << "\n";
@@ -75,8 +76,10 @@ void processFrame(int frameId, bool display) {
                       2
                       );
             
-            // crop immage
+            // crop immage and resize
             face = src(r);
+            resize(face, face, faceSize);
+            
             sprintf(facePath, "%s%d_%d.png", faceDir, frameId, i);
             imwrite(facePath, face);
         
