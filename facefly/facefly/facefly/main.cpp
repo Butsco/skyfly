@@ -36,14 +36,30 @@ int main(int argc, char** argv)
     ssOut << outDir << frameFilename;
     string outPath = ssOut.str();
     
+    const char* cascadeFile = "/Users/bert/Projects/opencv-3.0.0/data/haarcascades/haarcascade_frontalface_default.xml";
+    
     //cout << "outPath: " << outPath << "\n";
     
     Mat src = imread(framePath, 1 );
+    Mat grey;
+    cvtColor(src, grey, COLOR_BGR2GRAY);
     
-    imwrite(outPath, src);
+    vector<Rect> faces;
+    
+    CascadeClassifier faceCascade = CascadeClassifier(cascadeFile);
+    faceCascade.detectMultiScale(grey, faces, 1.1, 5, CV_HAAR_SCALE_IMAGE, Size(30, 30));
+    
+    printf("%zd face(s) are found.\n", faces.size());
+    
+    for (int i = 0; i < faces.size(); i++) {
+        Rect r = faces[i];
+        printf("a face is found at Rect(%d,%d,%d,%d).\n", r.x, r.y, r.width, r.height);
+    }
+    
+    imwrite(outPath, grey);
     
     namedWindow(frameFilename, WINDOW_AUTOSIZE );
-    imshow("Unprocessed Image",src);
+    imshow("Unprocessed Image",grey);
     waitKey(0);
     
     return 0;
