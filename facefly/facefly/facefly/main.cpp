@@ -5,9 +5,8 @@
 //  Created by Bert Wijnants on 05/12/15.
 //  Copyright (c) 2015 butsco. All rights reserved.
 //
-
-#include <iostream>
-#import <opencv2/opencv.hpp>
+#include "main.hpp"
+#include <opencv2/opencv.hpp>
 #include <opencv2/highgui/highgui.hpp>
 #include <unistd.h>
 #include <stdio.h>
@@ -18,27 +17,32 @@
 using namespace std;
 using namespace cv;
 
+const char* cascadeFile = "/Users/bert/Projects/opencv-3.0.0/data/haarcascades/haarcascade_frontalface_default.xml";
+
+const char* frameDir = "/Users/bert/Projects/skyfly/facefly/s01e01/frames/";
+const char* outDir = "/Users/bert/Projects/skyfly/facefly/s01e01/output/";
+
+
+CascadeClassifier faceCascade;
+
+
 int main(int argc, char** argv)
 {
     cout << "Init\n";
+    faceCascade = CascadeClassifier(cascadeFile);
     
-    stringstream ssIn;
-    string framesDir = string("/Users/bert/Projects/skyfly/facefly/s01e01/frames/");
-    string frameFilename = string("1313.png");
-    ssIn << framesDir << frameFilename;
-    string framePath = ssIn.str();
+    processFrame(1313);
     
-    cout << "frame: " << frameFilename << "\n";
-    //cout << "framepath: " << framePath << "\n";
+    return 0;
+}
+
+void processFrame(int frameId) {
+    char framePath[150];
+    char outPath[150];
+    sprintf(framePath, "%s%d.png", frameDir, frameId);
+    sprintf(outPath, "%s%d.png", outDir, frameId);
     
-    stringstream ssOut;
-    string outDir = string("/Users/bert/Projects/skyfly/facefly/s01e01/output/");
-    ssOut << outDir << frameFilename;
-    string outPath = ssOut.str();
-    
-    const char* cascadeFile = "/Users/bert/Projects/opencv-3.0.0/data/haarcascades/haarcascade_frontalface_default.xml";
-    
-    //cout << "outPath: " << outPath << "\n";
+    cout << "frame: " << framePath << "\n";
     
     Mat src = imread(framePath, 1);
     Mat output;
@@ -47,7 +51,6 @@ int main(int argc, char** argv)
     
     vector<Rect> faces;
     
-    CascadeClassifier faceCascade = CascadeClassifier(cascadeFile);
     faceCascade.detectMultiScale(grey, faces, 1.1, 5, CV_HAAR_SCALE_IMAGE, Size(30, 30));
     
     printf("%zd face(s) are found.\n", faces.size());
@@ -63,14 +66,12 @@ int main(int argc, char** argv)
                   Point(r.x+r.width, r.y+r.height),
                   CV_RGB(255,0,0),
                   2
-        );
+                  );
     }
     
     imwrite(outPath, output);
     
-    namedWindow(frameFilename, WINDOW_AUTOSIZE );
-    imshow("Unprocessed Image",output);
+    namedWindow(framePath, WINDOW_AUTOSIZE );
+    imshow(framePath, output);
     waitKey(0);
-    
-    return 0;
 }
