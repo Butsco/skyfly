@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>32A8FA38-675E-4001-A87B-CCF854097852</string>
+	<key>IDESourceControlProjectName</key>
+	<string>facefly</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>1ABE3A7A37786D905575DDA32205A574D1AE23FB</key>
+		<string>github.com:Butsco/skyfly.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>facefly/facefly/facefly.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>1ABE3A7A37786D905575DDA32205A574D1AE23FB</key>
+		<string>../../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>github.com:Butsco/skyfly.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>1ABE3A7A37786D905575DDA32205A574D1AE23FB</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>1ABE3A7A37786D905575DDA32205A574D1AE23FB</string>
+			<key>IDESourceControlWCCName</key>
+			<string>skyfly</string>
+		</dict>
+	</array>
+</dict>
+</plist>
