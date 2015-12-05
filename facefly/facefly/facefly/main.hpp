@@ -9,6 +9,6 @@
 #ifndef facefly_main_hpp
 #define facefly_main_hpp
 
-void processFrame(int frameId);
+void processFrame(int frameId, bool display);
 
 #endif
